@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pdftools.com/sitemap.xml
+
+# Disallow admin and backend
+Disallow: /admin.html
+Disallow: /backend/
+Disallow: /api/
+
+# Allow all main pages
+Allow: /index.html
+Allow: /tools.html
+Allow: /tool.html
+Allow: /editor.html
+Allow: /viewer.html
+Allow: /converter.html
+Allow: /optimize.html
+Allow: /files.html
+Allow: /pages/
