@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contact PDF Tools - Get in touch with our team for support, feedback, or business inquiries.">
+    <title>Contact Us - PDF Tools</title>
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/ux.css">
+
+    <style>
+        .contact-section {
+            padding: 120px 0 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-form {
+            background: var(--surface);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .contact-card {
+            background: var(--surface);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .contact-card-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-2);
+        }
+
+        .contact-card h3 {
+            margin-bottom: var(--space-2);
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: var(--space-8);
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: var(--space-4);
+            color: #10b981;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-icon">P</span>
+                    <span>PDF<span class="text-gradient">Tools</span></span>
+                </a>
+
+                <nav class="nav" id="nav">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../tools.html" class="nav-link">All Tools</a>
+                    <a href="../editor.html" class="nav-link">Editor</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                    </button>
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../tools.html" class="nav-link">All Tools</a>
+            <a href="../editor.html" class="nav-link">Editor</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+        </nav>
+    </div>
+
+    <main>
+        <section class="contact-section">
+            <div class="container">
+                <div class="text-center mb-8">
+                    <span class="section-badge">💬 Get in Touch</span>
+                    <h1 class="section-title">Contact Us</h1>
+                    <p class="section-description">Have questions, feedback, or need help? We'd love to hear from you!
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-form" id="contactFormContainer">
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Your Name *</label>
+                                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required placeholder="john@example.com">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="feedback">Feedback & Suggestions</option>
+                                    <option value="bug">Report a Bug</option>
+                                    <option value="business">Business Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" required
+                                    placeholder="Tell us how we can help..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                ✉️ Send Message
+                            </button>
+                        </form>
+
+                        <div class="success-message" id="successMessage">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            <h2>Message Sent!</h2>
+                            <p>Thank you for reaching out. We'll get back to you as soon as possible.</p>
+                            <button class="btn btn-secondary" onclick="resetForm()"
+                                style="margin-top: var(--space-4);">Send Another Message</button>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">📧</div>
+                            <h3>Email Us</h3>
+                            <p>support@pdftools.com</p>
+                            <p>We respond within 24 hours</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">💡</div>
+                            <h3>Feature Requests</h3>
+                            <p>Have an idea for a new tool or feature? We love hearing from our users!</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">🐛</div>
+                            <h3>Report a Bug</h3>
+                            <p>Found something not working? Let us know and we'll fix it quickly.</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">🤝</div>
+                            <h3>Business Inquiries</h3>
+                            <p>Interested in partnerships or enterprise solutions? Get in touch.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" style="margin-top: var(--space-8);">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in localStorage as backup
+            const contacts = JSON.parse(localStorage.getItem('pdftools_contacts') || '[]');
+            contacts.push(formData);
+            localStorage.setItem('pdftools_contacts', JSON.stringify(contacts));
+
+            // Show success
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+
+            // Show toast
+            if (window.PDFTools?.showToast) {
+                PDFTools.showToast('success', 'Message Sent', 'We will get back to you soon!');
+            }
+        });
+
+        function resetForm() {
+            form.reset();
+            form.style.display = 'block';
+            successMessage.classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>
