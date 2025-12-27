@@ -29,6 +29,15 @@
 
     .mobile-nav {
         display: block;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .mobile-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .hero {
