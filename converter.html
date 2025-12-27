@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Convert PDF to Word, Excel, PowerPoint, Images and more. Free online PDF converter.">
+    <title>Convert PDF - PDF Tools</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">P</span>
+                    <span>PDF<span class="text-gradient">Tools</span></span>
+                </a>
+
+                <nav class="nav" id="nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tools.html" class="nav-link">All Tools</a>
+                    <a href="editor.html" class="nav-link">Editor</a>
+                    <a href="converter.html" class="nav-link active">Convert</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                    </button>
+
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="tools.html" class="nav-link">All Tools</a>
+            <a href="editor.html" class="nav-link">Editor</a>
+            <a href="converter.html" class="nav-link active">Convert</a>
+        </nav>
+    </div>
+
+    <!-- Page Header -->
+    <section class="section" style="padding-top: 120px; padding-bottom: var(--space-8);">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: var(--space-8);">
+                <h1 class="section-title">PDF Converter</h1>
+                <p class="section-description">Convert PDFs to and from various formats quickly and easily</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversion Options -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!-- From PDF -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span
+                        style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">From
+                        PDF</span>
+                    <span style="font-size: 14px; color: var(--text-muted);">Convert PDF to other formats</span>
+                </h2>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-word'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #2b5797 0%, #1e3a5f 100%);">
+                            <span style="font-size: 20px;">📄</span>
+                        </div>
+                        <h3 class="tool-card-title">PDF to Word</h3>
+                        <p class="tool-card-description">Convert PDF to editable DOCX files</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-excel'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #217346 0%, #185c37 100%);">
+                            <span style="font-size: 20px;">📊</span>
+                        </div>
+                        <h3 class="tool-card-title">PDF to Excel</h3>
+                        <p class="tool-card-description">Extract tables to spreadsheets</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-ppt'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #d24726 0%, #b7332f 100%);">
+                            <span style="font-size: 20px;">📽️</span>
+                        </div>
+                        <h3 class="tool-card-title">PDF to PowerPoint</h3>
+                        <p class="tool-card-description">Convert to editable presentations</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-image'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);">
+                            <span style="font-size: 20px;">🖼️</span>
+                        </div>
+                        <h3 class="tool-card-title">PDF to Image</h3>
+                        <p class="tool-card-description">Convert pages to PNG or JPG</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-text'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);">
+                            <span style="font-size: 20px;">📝</span>
+                        </div>
+                        <h3 class="tool-card-title">PDF to Text</h3>
+                        <p class="tool-card-description">Extract plain text from PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- To PDF -->
+            <div>
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span
+                        style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">To
+                        PDF</span>
+                    <span style="font-size: 14px; color: var(--text-muted);">Convert other formats to PDF</span>
+                </h2>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="location.href='tool.html?tool=image-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);">
+                            <span style="font-size: 20px;">📷</span>
+                        </div>
+                        <h3 class="tool-card-title">Image to PDF</h3>
+                        <p class="tool-card-description">Convert JPG, PNG, GIF to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=word-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #2b5797 0%, #1e3a5f 100%);">
+                            <span style="font-size: 20px;">📄</span>
+                        </div>
+                        <h3 class="tool-card-title">Word to PDF</h3>
+                        <p class="tool-card-description">Convert DOCX files to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=excel-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #217346 0%, #185c37 100%);">
+                            <span style="font-size: 20px;">📊</span>
+                        </div>
+                        <h3 class="tool-card-title">Excel to PDF</h3>
+                        <p class="tool-card-description">Convert XLSX to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=ppt-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #d24726 0%, #b7332f 100%);">
+                            <span style="font-size: 20px;">📽️</span>
+                        </div>
+                        <h3 class="tool-card-title">PowerPoint to PDF</h3>
+                        <p class="tool-card-description">Convert PPTX to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=html-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);">
+                            <span style="font-size: 20px;">🌐</span>
+                        </div>
+                        <h3 class="tool-card-title">HTML to PDF</h3>
+                        <p class="tool-card-description">Convert web pages to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=text-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);">
+                            <span style="font-size: 20px;">📝</span>
+                        </div>
+                        <h3 class="tool-card-title">Text to PDF</h3>
+                        <p class="tool-card-description">Convert TXT files to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=markdown-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);">
+                            <span style="font-size: 20px;">📑</span>
+                        </div>
+                        <h3 class="tool-card-title">Markdown to PDF</h3>
+                        <p class="tool-card-description">Convert MD files to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+
+                    <div class="tool-card" onclick="location.href='tool.html?tool=epub-to-pdf'">
+                        <div class="tool-card-icon"
+                            style="background: linear-gradient(135deg, #795548 0%, #5d4037 100%);">
+                            <span style="font-size: 20px;">📚</span>
+                        </div>
+                        <h3 class="tool-card-title">EPUB to PDF</h3>
+                        <p class="tool-card-description">Convert eBooks to PDF</p>
+                        <span class="tool-card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="pages/privacy.html" class="footer-link">Privacy</a>
+                    <a href="pages/terms.html" class="footer-link">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Free online PDF tools - Convert, edit, merge, split, compress PDFs and more. All processing happens in your browser for maximum privacy.">
+  <meta name="keywords" content="PDF tools, PDF converter, PDF editor, merge PDF, split PDF, compress PDF, online PDF">
+  <meta name="author" content="PDF Tools">
+
+  <title>PDF Tools - Free Online PDF Editor & Converter</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/tools.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/ux.css">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PDF Tools - Free Online PDF Editor & Converter">
+  <meta property="og:description"
+    content="50+ free PDF tools. Convert, edit, merge, split, compress. 100% private - files never leave your device.">
+  <meta property="og:url" content="https://pdftools.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://pdftools.com/">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PDF Tools",
+    "url": "https://pdftools.com/",
+    "description": "Free online PDF tools - Convert, edit, merge, split, compress PDFs and more.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://pdftools.com/tools.html?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Tools",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Merge PDF files",
+      "Split PDF pages",
+      "Compress PDF files",
+      "Convert PDF to Word",
+      "Convert images to PDF",
+      "Add password protection",
+      "Remove PDF passwords",
+      "Add watermarks",
+      "Rotate PDF pages",
+      "Extract PDF pages"
+    ],
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "softwareVersion": "1.0"
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">P</span>
+          <span>PDF<span class="text-gradient">Tools</span></span>
+        </a>
+
+        <nav class="nav" id="nav">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="tools.html" class="nav-link">All Tools</a>
+          <a href="viewer.html" class="nav-link">Viewer</a>
+          <a href="editor.html" class="nav-link">Editor</a>
+          <a href="files.html" class="nav-link">Files</a>
+          <a href="optimize.html" class="nav-link">Optimize</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5" />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+          </button>
+
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <nav class="nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="tools.html" class="nav-link">All Tools</a>
+      <a href="viewer.html" class="nav-link">Viewer</a>
+      <a href="editor.html" class="nav-link">Editor</a>
+      <a href="files.html" class="nav-link">Files</a>
+      <a href="optimize.html" class="nav-link">Optimize</a>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>100% Free & Private - All Processing in Browser</span>
+        </div>
+
+        <h1 class="hero-title">
+          The Most Powerful<br>
+          <span class="highlight">PDF Tools</span> Online
+        </h1>
+
+        <p class="hero-description">
+          Edit, convert, merge, split, compress, and secure your PDFs with our comprehensive suite of free tools. Your
+          files never leave your device.
+        </p>
+
+        <div class="hero-actions">
+          <a href="tools.html" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            Explore All Tools
+          </a>
+          <a href="editor.html" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Open Editor
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">50+</div>
+            <div class="hero-stat-label">PDF Tools</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">100%</div>
+            <div class="hero-stat-label">Free Forever</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">0</div>
+            <div class="hero-stat-label">Files Uploaded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Upload Section -->
+  <section class="section" id="quick-upload">
+    <div class="container container-sm">
+      <div class="dropzone" id="dropzone">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+        <h3 class="dropzone-title">Drop your PDF here</h3>
+        <p class="dropzone-subtitle">or click to browse files</p>
+        <p class="dropzone-hint">Supports PDF, Images, Word, Excel, PowerPoint</p>
+        <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.html,.md"
+          multiple hidden>
+      </div>
+
+      <!-- Trust Badges -->
+      <div id="trustBadges" style="margin-top: var(--space-6);"></div>
+    </div>
+  </section>
+
+  <!-- Tool Categories -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">🛠️ Categories</span>
+        <h2 class="section-title">Everything You Need for PDFs</h2>
+        <p class="section-description">
+          Organize, convert, edit, secure and more. Pick a category to get started.
+        </p>
+      </div>
+
+      <div class="grid category-grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-6);">
+        <a href="tools.html#convert" class="category-card">
+          <div class="category-card-icon">📄</div>
+          <h3 class="category-card-title">Convert</h3>
+          <p class="category-card-count">15 tools</p>
+        </a>
+
+        <a href="tools.html#edit" class="category-card">
+          <div class="category-card-icon">✏️</div>
+          <h3 class="category-card-title">Edit</h3>
+          <p class="category-card-count">20 tools</p>
+        </a>
+
+        <a href="tools.html#manage" class="category-card">
+          <div class="category-card-icon">🗂️</div>
+          <h3 class="category-card-title">Organize</h3>
+          <p class="category-card-count">14 tools</p>
+        </a>
+
+        <a href="tools.html#security" class="category-card">
+          <div class="category-card-icon">🔐</div>
+          <h3 class="category-card-title">Security</h3>
+          <p class="category-card-count">9 tools</p>
+        </a>
+
+        <a href="tools.html#annotate" class="category-card">
+          <div class="category-card-icon">📌</div>
+          <h3 class="category-card-title">Annotate</h3>
+          <p class="category-card-count">11 tools</p>
+        </a>
+
+        <a href="tools.html#forms" class="category-card">
+          <div class="category-card-icon">🧾</div>
+          <h3 class="category-card-title">Forms</h3>
+          <p class="category-card-count">9 tools</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Tools -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">⭐ Popular</span>
+        <h2 class="section-title">Most Used Tools</h2>
+        <p class="section-description">
+          Quick access to our most popular PDF tools
+        </p>
+      </div>
+
+      <div class="tools-grid">
+        <div class="tool-card" onclick="location.href='tool.html?tool=merge'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="8" y="2" width="8" height="4" rx="1" />
+              <path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" />
+              <path d="M12 11v6M9 14h6" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">Merge PDF</h3>
+          <p class="tool-card-description">Combine multiple PDFs into one document</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+
+        <div class="tool-card" onclick="location.href='tool.html?tool=split'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 3h5v5M8 3H3v5M3 16v5h5M21 16v5h-5" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <line x1="3" y1="3" x2="10" y2="10" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+              <line x1="21" y1="21" x2="14" y2="14" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">Split PDF</h3>
+          <p class="tool-card-description">Separate PDF pages into multiple files</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+
+        <div class="tool-card" onclick="location.href='tool.html?tool=pdf-to-word'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">PDF to Word</h3>
+          <p class="tool-card-description">Convert PDF to editable Word document</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+
+        <div class="tool-card" onclick="location.href='tool.html?tool=img-to-pdf'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">Image to PDF</h3>
+          <p class="tool-card-description">Convert images to PDF document</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+
+        <div class="tool-card" onclick="location.href='tool.html?tool=compress'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v12" />
+              <path d="m8 11 4 4 4-4" />
+              <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">Compress PDF</h3>
+          <p class="tool-card-description">Reduce PDF file size while maintaining quality</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+
+        <div class="tool-card" onclick="location.href='tool.html?tool=protect'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <h3 class="tool-card-title">Protect PDF</h3>
+          <p class="tool-card-description">Add password protection to your PDF</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="tools.html" class="btn btn-primary">View All 50+ Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">✨ Features</span>
+        <h2 class="section-title">Why Choose PDF Tools?</h2>
+        <p class="section-description">
+          Built with privacy, speed, and ease of use in mind
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">100% Private</h4>
+            <p class="feature-description">All file processing happens in your browser. Your files never leave your
+              device.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Lightning Fast</h4>
+            <p class="feature-description">No upload or download wait times. Process files instantly on your device.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Easy to Use</h4>
+            <p class="feature-description">Simple drag & drop interface. No technical knowledge required.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Works Everywhere</h4>
+            <p class="feature-description">Fully responsive design. Use on desktop, tablet, or mobile.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">No Installation</h4>
+            <p class="feature-description">Works directly in your browser. No software to download or install.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Always Free</h4>
+            <p class="feature-description">All tools are completely free to use. No hidden fees or limits.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">P</span>
+            <span>PDF<span class="text-gradient">Tools</span></span>
+          </a>
+          <p>Free online PDF tools for everyone. Convert, edit, merge, and secure your PDFs with complete privacy.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Tools</h4>
+          <div class="footer-links">
+            <a href="tools.html#convert" class="footer-link">Convert PDF</a>
+            <a href="tools.html#edit" class="footer-link">Edit PDF</a>
+            <a href="tools.html#manage" class="footer-link">Organize PDF</a>
+            <a href="tools.html#security" class="footer-link">Secure PDF</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Popular</h4>
+          <div class="footer-links">
+            <a href="tool.html?tool=merge" class="footer-link">Merge PDF</a>
+            <a href="tool.html?tool=split" class="footer-link">Split PDF</a>
+            <a href="tool.html?tool=compress" class="footer-link">Compress PDF</a>
+            <a href="tool.html?tool=pdf-to-word" class="footer-link">PDF to Word</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Legal</h4>
+          <div class="footer-links">
+            <a href="pages/privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="pages/terms.html" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/ux.js"></script>
+</body>
+
+</html>

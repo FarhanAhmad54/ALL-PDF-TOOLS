@@ -1,0 +1,257 @@
+/* ============================================
+   PDF Tools - Responsive Styles
+   ============================================ */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-stats {
+        gap: var(--space-6);
+    }
+
+    .hero-stat-value {
+        font-size: var(--text-3xl);
+    }
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 120px 0 60px;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .hero-description {
+        font-size: var(--text-base);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        margin-top: var(--space-10);
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+
+    .category-card {
+        padding: var(--space-6);
+    }
+
+    .category-card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    .category-card-title {
+        font-size: var(--text-base);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section-header {
+        margin-bottom: var(--space-8);
+    }
+
+    .section-title {
+        font-size: var(--text-2xl);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+    }
+
+    .container {
+        padding: 0 var(--space-4);
+    }
+
+    .dropzone {
+        padding: var(--space-8);
+    }
+
+    .dropzone-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .dropzone-title {
+        font-size: var(--text-lg);
+    }
+
+    /* Modal mobile */
+    .modal {
+        max-width: 95vw;
+        margin: var(--space-4);
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--space-4);
+    }
+
+    /* Toast mobile */
+    .toast-container {
+        left: var(--space-4);
+        right: var(--space-4);
+        bottom: var(--space-4);
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-orb {
+        display: none;
+    }
+
+    .btn-lg {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-base);
+    }
+
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .file-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    h1 {
+        font-size: var(--text-3xl);
+    }
+
+    h2 {
+        font-size: var(--text-2xl);
+    }
+
+    h3 {
+        font-size: var(--text-xl);
+    }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+    .container {
+        padding: 0 var(--space-8);
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Print styles */
+@media print {
+
+    .header,
+    .footer,
+    .theme-toggle,
+    .nav-toggle {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 20px 0;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero-orb,
+    .hero-gradient {
+        animation: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: hsl(220, 25%, 30%);
+        --border-subtle: hsl(220, 25%, 40%);
+    }
+
+    .glass,
+    .glass-card {
+        background: var(--surface);
+        border-width: 2px;
+    }
+}

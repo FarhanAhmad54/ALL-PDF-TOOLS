@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PDF Optimization Tools - Compress, clean, and optimize PDF files">
+    <title>Optimize PDF - PDF Tools</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">P</span>
+                    <span>PDF<span class="text-gradient">Tools</span></span>
+                </a>
+
+                <nav class="nav" id="nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tools.html" class="nav-link">All Tools</a>
+                    <a href="viewer.html" class="nav-link">Viewer</a>
+                    <a href="files.html" class="nav-link">Files</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                    </button>
+
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="section" style="padding-top: 120px;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">PDF Optimization</h1>
+                <p class="section-description">Compress, clean, and optimize your PDF files</p>
+            </div>
+
+            <!-- Upload -->
+            <div class="dropzone mb-8" id="dropzone" style="max-width: 600px; margin: 0 auto var(--space-8);">
+                <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <h3 class="dropzone-title">Drop your PDF here</h3>
+                <p class="dropzone-subtitle">or click to browse</p>
+                <input type="file" id="fileInput" accept=".pdf" hidden>
+            </div>
+
+            <!-- File Info (hidden until file loaded) -->
+            <div class="card mb-6 hidden" id="fileInfo" style="max-width: 600px; margin: 0 auto var(--space-6);">
+                <div class="flex items-center gap-4">
+                    <div class="file-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-semibold" id="fileName">filename.pdf</div>
+                        <div class="text-sm text-muted">
+                            <span id="fileSize">0 KB</span> • <span id="filePages">0</span> pages
+                        </div>
+                    </div>
+                    <button class="btn btn-ghost" id="removeFile">✕</button>
+                </div>
+            </div>
+
+            <!-- Optimization Options -->
+            <div class="grid-2 gap-6" style="max-width: 800px; margin: 0 auto;">
+                <!-- Compression -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        📦 Compression
+                    </h3>
+
+                    <div class="mb-4">
+                        <label class="flex items-center gap-2 mb-2">
+                            <input type="checkbox" id="compressImages" checked>
+                            <span>Compress images</span>
+                        </label>
+                        <div class="ml-6">
+                            <label class="text-sm text-muted">Image Quality</label>
+                            <input type="range" id="imageQuality" min="10" max="100" value="70" style="width: 100%;">
+                            <div class="flex justify-between text-xs text-muted">
+                                <span>Smaller</span>
+                                <span id="qualityValue">70%</span>
+                                <span>Better</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="reduceDPI" checked>
+                            <span>Reduce image DPI to</span>
+                            <select id="targetDPI" class="input" style="width: 80px;">
+                                <option value="72">72</option>
+                                <option value="96">96</option>
+                                <option value="150" selected>150</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="useObjectStreams" checked>
+                            <span>Use object streams (smaller file)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Remove Elements -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        🧹 Remove Elements
+                    </h3>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeThumbnails">
+                            <span>Embedded thumbnails</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeMetadata">
+                            <span>Metadata (author, title, etc.)</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeAnnotations">
+                            <span>Annotations & comments</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeLinks">
+                            <span>Hyperlinks</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeJavaScript">
+                            <span>Embedded JavaScript</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="removeAttachments">
+                            <span>Attachments</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Flatten -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        📄 Flatten
+                    </h3>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="flattenAnnotations">
+                            <span>Flatten annotations</span>
+                        </label>
+                        <p class="text-xs text-muted ml-6">Merge annotations into page content</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="flattenForms">
+                            <span>Flatten form fields</span>
+                        </label>
+                        <p class="text-xs text-muted ml-6">Convert form fields to static text</p>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="flattenLayers">
+                            <span>Flatten layers</span>
+                        </label>
+                        <p class="text-xs text-muted ml-6">Merge all layers into one</p>
+                    </div>
+                </div>
+
+                <!-- Standards & Compatibility -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        ✅ Standards
+                    </h3>
+
+                    <div class="mb-4">
+                        <label class="text-sm font-medium mb-2" style="display: block;">PDF Version</label>
+                        <select id="pdfVersion" class="input" style="width: 100%;">
+                            <option value="">Keep original</option>
+                            <option value="1.4">PDF 1.4 (Acrobat 5)</option>
+                            <option value="1.5">PDF 1.5 (Acrobat 6)</option>
+                            <option value="1.6">PDF 1.6 (Acrobat 7)</option>
+                            <option value="1.7">PDF 1.7 (Acrobat 8+)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="optimizeWeb">
+                            <span>Optimize for web viewing</span>
+                        </label>
+                        <p class="text-xs text-muted ml-6">Fast web view (linearize)</p>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" id="convertPDFA">
+                            <span>Convert to PDF/A compliant</span>
+                        </label>
+                        <p class="text-xs text-muted ml-6">For long-term archiving</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-center gap-4 mt-8" id="actionButtons" style="display: none;">
+                <button class="btn btn-secondary" id="resetBtn">Reset Options</button>
+                <button class="btn btn-primary" id="optimizeBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                    Optimize PDF
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="card mt-6 hidden" id="progressCard" style="max-width: 600px; margin: var(--space-6) auto;">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium" id="progressStatus">Processing...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Result -->
+            <div class="card mt-6 hidden" id="resultCard" style="max-width: 600px; margin: var(--space-6) auto;">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🎉</div>
+                    <h3 class="text-xl font-semibold">Optimization Complete!</h3>
+                </div>
+
+                <div class="flex justify-between items-center p-4 bg-secondary rounded-lg mb-4"
+                    style="background: var(--bg-secondary); border-radius: var(--radius-md);">
+                    <div>
+                        <div class="text-sm text-muted">Original Size</div>
+                        <div class="font-semibold" id="originalSize">0 KB</div>
+                    </div>
+                    <div class="text-2xl">→</div>
+                    <div>
+                        <div class="text-sm text-muted">New Size</div>
+                        <div class="font-semibold text-success" id="newSize">0 KB</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-muted">Saved</div>
+                        <div class="font-semibold text-primary" id="savedPercent">0%</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="downloadBtn" style="width: 100%;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Download Optimized PDF
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/optimizer.js"></script>
+</body>
+
+</html>

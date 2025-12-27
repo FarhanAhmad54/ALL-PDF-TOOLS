@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Free online PDF Editor - Edit, annotate, and modify PDF files directly in your browser">
+    <title>PDF Editor - PDF Tools</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/editor.css">
+
+    <!-- PDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Fabric.js for canvas editing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+
+<body class="editor-body">
+    <!-- Editor Header -->
+    <header class="editor-header">
+        <div class="editor-header-left">
+            <a href="index.html" class="logo" style="font-size: var(--text-base);">
+                <span class="logo-icon" style="width: 32px; height: 32px; font-size: 14px;">P</span>
+                <span>PDF<span class="text-gradient">Tools</span></span>
+            </a>
+            <div class="editor-file-info">
+                <span class="editor-filename" id="fileName">No file loaded</span>
+                <span class="editor-saved" id="saveStatus">●</span>
+            </div>
+        </div>
+
+        <div class="editor-header-center">
+            <button class="editor-btn" id="undoBtn" title="Undo (Ctrl+Z)" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 7v6h6" />
+                    <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
+                </svg>
+            </button>
+            <button class="editor-btn" id="redoBtn" title="Redo (Ctrl+Y)" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 7v6h-6" />
+                    <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13" />
+                </svg>
+            </button>
+
+            <div class="editor-divider"></div>
+
+            <button class="editor-btn" id="zoomOutBtn" title="Zoom Out">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+            </button>
+            <span class="zoom-level" id="zoomLevel">100%</span>
+            <button class="editor-btn" id="zoomInBtn" title="Zoom In">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="8" x2="11" y2="14" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+            </button>
+
+            <div class="editor-divider"></div>
+
+            <span class="page-nav">
+                <button class="editor-btn" id="prevPageBtn" title="Previous Page" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <span id="pageInfo">0 / 0</span>
+                <button class="editor-btn" id="nextPageBtn" title="Next Page" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+            </span>
+        </div>
+
+        <div class="editor-header-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+            </button>
+            <button class="btn btn-secondary" id="downloadBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Editor Area -->
+    <div class="editor-container">
+        <!-- Left Toolbar -->
+        <aside class="editor-toolbar" id="toolbar">
+            <div class="toolbar-section">
+                <button class="tool-btn active" data-tool="select" title="Select (V)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="pan" title="Pan (H)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
+                        <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2" />
+                        <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8" />
+                        <path
+                            d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="tool-btn" data-tool="text" title="Add Text (T)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="4 7 4 4 20 4 20 7" />
+                        <line x1="9" y1="20" x2="15" y2="20" />
+                        <line x1="12" y1="4" x2="12" y2="20" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="highlight" title="Highlight (H)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="underline" title="Underline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3" />
+                        <line x1="4" y1="21" x2="20" y2="21" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="strikeout" title="Strikeout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4H9a3 3 0 0 0-2.83 4" />
+                        <path d="M14 12a4 4 0 0 1 0 8H6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="tool-btn" data-tool="draw" title="Free Draw (D)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                        <path d="M2 2l7.586 7.586" />
+                        <circle cx="11" cy="11" r="2" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="eraser" title="Eraser (E)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 21h10" />
+                        <path d="M5.22 14.78L16 4l4 4-10.78 10.78a2.83 2.83 0 1 1-4-4Z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="tool-btn" data-tool="rectangle" title="Rectangle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="circle" title="Circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="line" title="Line">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="19" x2="19" y2="5" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="arrow" title="Arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="tool-btn" data-tool="note" title="Sticky Note (N)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="image" title="Add Image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="signature" title="Signature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Canvas Area -->
+        <main class="editor-main">
+            <!-- Empty state -->
+            <div class="editor-empty" id="emptyState">
+                <div class="dropzone" id="dropzone" style="max-width: 500px; margin: 0 auto;">
+                    <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    <h3 class="dropzone-title">Open a PDF to edit</h3>
+                    <p class="dropzone-subtitle">Drop your PDF here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".pdf" hidden>
+                </div>
+            </div>
+
+            <!-- PDF Canvas -->
+            <div class="pdf-canvas-wrapper hidden" id="canvasWrapper">
+                <canvas id="pdfCanvas"></canvas>
+                <canvas id="fabricCanvas"></canvas>
+            </div>
+        </main>
+
+        <!-- Right Properties Panel -->
+        <aside class="editor-properties" id="propertiesPanel">
+            <div class="properties-header">
+                <h3>Properties</h3>
+            </div>
+
+            <div class="properties-content" id="propertiesContent">
+                <div class="property-group">
+                    <label>Color</label>
+                    <div class="color-picker">
+                        <input type="color" id="strokeColor" value="#000000">
+                        <span>Stroke</span>
+                    </div>
+                    <div class="color-picker">
+                        <input type="color" id="fillColor" value="#ffffff">
+                        <span>Fill</span>
+                    </div>
+                </div>
+
+                <div class="property-group">
+                    <label>Stroke Width</label>
+                    <input type="range" id="strokeWidth" min="1" max="20" value="2">
+                    <span id="strokeWidthValue">2px</span>
+                </div>
+
+                <div class="property-group">
+                    <label>Opacity</label>
+                    <input type="range" id="opacity" min="0" max="100" value="100">
+                    <span id="opacityValue">100%</span>
+                </div>
+
+                <div class="property-group text-props hidden" id="textProps">
+                    <label>Font Size</label>
+                    <input type="number" id="fontSize" value="16" min="8" max="72">
+                </div>
+
+                <div class="property-group">
+                    <label>Actions</label>
+                    <button class="btn btn-secondary btn-sm" id="deleteBtn" style="width: 100%;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                        Delete Selected
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Page Thumbnails -->
+    <div class="page-thumbnails" id="thumbnails">
+        <!-- Thumbnails rendered here -->
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+
+</html>

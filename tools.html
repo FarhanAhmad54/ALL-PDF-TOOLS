@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="All PDF tools - Convert, edit, merge, split, compress PDFs and more. 50+ free tools.">
+    <title>All PDF Tools - PDF Tools</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">P</span>
+                    <span>PDF<span class="text-gradient">Tools</span></span>
+                </a>
+
+                <nav class="nav" id="nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tools.html" class="nav-link active">All Tools</a>
+                    <a href="editor.html" class="nav-link">Editor</a>
+                    <a href="converter.html" class="nav-link">Convert</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                    </button>
+
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="tools.html" class="nav-link active">All Tools</a>
+            <a href="editor.html" class="nav-link">Editor</a>
+            <a href="converter.html" class="nav-link">Convert</a>
+        </nav>
+    </div>
+
+    <!-- Page Header -->
+    <section class="section" style="padding-top: 120px; padding-bottom: var(--space-8);">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: var(--space-8);">
+                <h1 class="section-title">All PDF Tools</h1>
+                <p class="section-description">50+ powerful tools to work with your PDFs. All free, all private.</p>
+            </div>
+
+            <!-- Search & Tabs -->
+            <div class="flex flex-col gap-4" style="max-width: 800px; margin: 0 auto;">
+                <div class="input-group">
+                    <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="text" class="input" id="searchTools" placeholder="Search tools...">
+                </div>
+
+                <div class="tabs" id="categoryTabs">
+                    <button class="tab active" data-category="all">All Tools</button>
+                    <button class="tab" data-category="convert">📄 Convert</button>
+                    <button class="tab" data-category="edit">✏️ Edit</button>
+                    <button class="tab" data-category="manage">🗂️ Organize</button>
+                    <button class="tab" data-category="security">🔐 Security</button>
+                    <button class="tab" data-category="annotate">📌 Annotate</button>
+                    <button class="tab" data-category="forms">🧾 Forms</button>
+                    <button class="tab" data-category="print">🖨️ Print</button>
+                    <button class="tab" data-category="share">📤 Share</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Tools will be rendered here by JavaScript -->
+            </div>
+
+            <div id="noResults" class="hidden text-center p-8">
+                <p class="text-lg" style="color: var(--text-muted);">No tools found matching your search.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="pages/privacy.html" class="footer-link">Privacy</a>
+                    <a href="pages/terms.html" class="footer-link">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // All tools data
+        const allTools = [
+            // Convert Tools
+            { id: 'pdf-to-word', name: 'PDF to Word', description: 'Convert PDF to editable Word document', category: 'convert', icon: 'file-text' },
+            { id: 'pdf-to-excel', name: 'PDF to Excel', description: 'Convert PDF tables to Excel spreadsheet', category: 'convert', icon: 'table' },
+            { id: 'pdf-to-ppt', name: 'PDF to PowerPoint', description: 'Convert PDF to PowerPoint presentation', category: 'convert', icon: 'presentation' },
+            { id: 'pdf-to-image', name: 'PDF to Image', description: 'Convert PDF pages to PNG or JPG images', category: 'convert', icon: 'image' },
+            { id: 'pdf-to-text', name: 'PDF to Text', description: 'Extract text content from PDF', category: 'convert', icon: 'align-left' },
+            { id: 'word-to-pdf', name: 'Word to PDF', description: 'Convert Word documents to PDF', category: 'convert', icon: 'file-plus' },
+            { id: 'excel-to-pdf', name: 'Excel to PDF', description: 'Convert Excel spreadsheets to PDF', category: 'convert', icon: 'file-plus' },
+            { id: 'ppt-to-pdf', name: 'PowerPoint to PDF', description: 'Convert PowerPoint to PDF', category: 'convert', icon: 'file-plus' },
+            { id: 'image-to-pdf', name: 'Image to PDF', description: 'Convert images to PDF document', category: 'convert', icon: 'image' },
+            { id: 'html-to-pdf', name: 'HTML to PDF', description: 'Convert HTML pages to PDF', category: 'convert', icon: 'code' },
+            { id: 'markdown-to-pdf', name: 'Markdown to PDF', description: 'Convert Markdown files to PDF', category: 'convert', icon: 'hash' },
+            { id: 'text-to-pdf', name: 'Text to PDF', description: 'Convert plain text to PDF', category: 'convert', icon: 'file-text' },
+            { id: 'epub-to-pdf', name: 'EPUB to PDF', description: 'Convert EPUB ebooks to PDF', category: 'convert', icon: 'book' },
+
+            // Edit Tools
+            { id: 'add-text', name: 'Add Text', description: 'Add new text anywhere on PDF', category: 'edit', icon: 'type' },
+            { id: 'edit-text', name: 'Edit Text', description: 'Modify existing text in PDF', category: 'edit', icon: 'edit-3' },
+            { id: 'remove-text', name: 'Remove Text', description: 'Delete text from PDF', category: 'edit', icon: 'trash-2' },
+            { id: 'add-shapes', name: 'Add Shapes', description: 'Draw rectangles, circles, and lines', category: 'edit', icon: 'square' },
+            { id: 'freehand-draw', name: 'Freehand Draw', description: 'Draw freely on PDF pages', category: 'edit', icon: 'edit-2' },
+            { id: 'add-watermark', name: 'Add Watermark', description: 'Add text or image watermark', category: 'edit', icon: 'droplet' },
+            { id: 'remove-watermark', name: 'Remove Watermark', description: 'Remove watermarks from PDF', category: 'edit', icon: 'x-circle' },
+            { id: 'add-background', name: 'Add Background', description: 'Add background color or image', category: 'edit', icon: 'layers' },
+            { id: 'crop-pages', name: 'Crop Pages', description: 'Crop PDF page margins', category: 'edit', icon: 'crop' },
+            { id: 'rotate-pages', name: 'Rotate Pages', description: 'Rotate PDF pages', category: 'edit', icon: 'rotate-cw' },
+            { id: 'resize-pages', name: 'Resize Pages', description: 'Change PDF page dimensions', category: 'edit', icon: 'maximize-2' },
+            { id: 'add-images', name: 'Add Images', description: 'Insert images into PDF', category: 'edit', icon: 'image' },
+            { id: 'add-links', name: 'Add Links', description: 'Add hyperlinks to PDF', category: 'edit', icon: 'link' },
+            { id: 'change-font', name: 'Change Font', description: 'Modify font size and color', category: 'edit', icon: 'bold' },
+
+            // Manage/Organize Tools
+            { id: 'merge', name: 'Merge PDF', description: 'Combine multiple PDFs into one', category: 'manage', icon: 'git-merge' },
+            { id: 'split', name: 'Split PDF', description: 'Separate PDF into multiple files', category: 'manage', icon: 'scissors' },
+            { id: 'reorder', name: 'Reorder Pages', description: 'Rearrange PDF page order', category: 'manage', icon: 'list' },
+            { id: 'delete-pages', name: 'Delete Pages', description: 'Remove pages from PDF', category: 'manage', icon: 'trash' },
+            { id: 'extract-pages', name: 'Extract Pages', description: 'Extract specific pages to new PDF', category: 'manage', icon: 'file-minus' },
+            { id: 'duplicate-pages', name: 'Duplicate Pages', description: 'Copy pages within PDF', category: 'manage', icon: 'copy' },
+            { id: 'add-blank', name: 'Add Blank Pages', description: 'Insert empty pages into PDF', category: 'manage', icon: 'file' },
+            { id: 'page-numbers', name: 'Page Numbers', description: 'Add page numbering to PDF', category: 'manage', icon: 'hash' },
+            { id: 'compress', name: 'Compress PDF', description: 'Reduce PDF file size', category: 'manage', icon: 'minimize-2' },
+            { id: 'table-of-contents', name: 'Table of Contents', description: 'Generate table of contents', category: 'manage', icon: 'list' },
+
+            // Security Tools
+            { id: 'protect', name: 'Add Password', description: 'Protect PDF with password', category: 'security', icon: 'lock' },
+            { id: 'unlock', name: 'Remove Password', description: 'Remove password protection', category: 'security', icon: 'unlock' },
+            { id: 'change-password', name: 'Change Password', description: 'Update PDF password', category: 'security', icon: 'key' },
+            { id: 'permissions', name: 'Set Permissions', description: 'Control print/copy permissions', category: 'security', icon: 'shield' },
+            { id: 'encrypt', name: 'Encrypt PDF', description: 'Add encryption to PDF', category: 'security', icon: 'shield' },
+            { id: 'decrypt', name: 'Decrypt PDF', description: 'Remove encryption from PDF', category: 'security', icon: 'shield-off' },
+            { id: 'redact', name: 'Redact Content', description: 'Permanently remove sensitive info', category: 'security', icon: 'eye-off' },
+            { id: 'sign', name: 'Digital Signature', description: 'Add digital signature to PDF', category: 'security', icon: 'pen-tool' },
+
+            // Annotate Tools
+            { id: 'highlight', name: 'Highlight Text', description: 'Highlight text in PDF', category: 'annotate', icon: 'edit-3' },
+            { id: 'underline', name: 'Underline Text', description: 'Underline text in PDF', category: 'annotate', icon: 'underline' },
+            { id: 'strikeout', name: 'Strikeout Text', description: 'Strike through text in PDF', category: 'annotate', icon: 'minus' },
+            { id: 'sticky-notes', name: 'Sticky Notes', description: 'Add sticky note comments', category: 'annotate', icon: 'message-square' },
+            { id: 'comments', name: 'Comment Threads', description: 'Add threaded comments', category: 'annotate', icon: 'message-circle' },
+            { id: 'draw-shapes', name: 'Draw Shapes', description: 'Add annotation shapes', category: 'annotate', icon: 'square' },
+            { id: 'stamps', name: 'Add Stamps', description: 'Add stamps to PDF', category: 'annotate', icon: 'check-square' },
+            { id: 'export-annotations', name: 'Export Annotations', description: 'Export all annotations', category: 'annotate', icon: 'download' },
+
+            // Forms Tools
+            { id: 'fill-form', name: 'Fill Form', description: 'Fill out PDF forms', category: 'forms', icon: 'edit' },
+            { id: 'add-text-field', name: 'Add Text Field', description: 'Insert text input fields', category: 'forms', icon: 'text-cursor' },
+            { id: 'add-checkbox', name: 'Add Checkbox', description: 'Add checkbox fields', category: 'forms', icon: 'check-square' },
+            { id: 'add-radio', name: 'Add Radio Button', description: 'Add radio button fields', category: 'forms', icon: 'circle' },
+            { id: 'add-dropdown', name: 'Add Dropdown', description: 'Add dropdown selection', category: 'forms', icon: 'chevron-down' },
+            { id: 'add-signature', name: 'Signature Field', description: 'Add signature field', category: 'forms', icon: 'pen-tool' },
+            { id: 'clear-form', name: 'Clear Form', description: 'Clear all form fields', category: 'forms', icon: 'x' },
+            { id: 'flatten-form', name: 'Flatten Form', description: 'Convert form to static PDF', category: 'forms', icon: 'layers' },
+
+            // Print Tools
+            { id: 'print', name: 'Print PDF', description: 'Print PDF document', category: 'print', icon: 'printer' },
+            { id: 'page-scaling', name: 'Page Scaling', description: 'Scale pages to fit paper', category: 'print', icon: 'maximize' },
+            { id: 'booklet', name: 'Booklet Layout', description: 'Create booklet print layout', category: 'print', icon: 'book-open' },
+            { id: 'n-up', name: 'Multiple Per Sheet', description: 'Print multiple pages per sheet', category: 'print', icon: 'grid' },
+            { id: 'margins', name: 'Adjust Margins', description: 'Modify page margins', category: 'print', icon: 'move' },
+
+            // Share Tools
+            { id: 'download', name: 'Download PDF', description: 'Download processed PDF', category: 'share', icon: 'download' },
+            { id: 'share-link', name: 'Share Link', description: 'Create shareable link', category: 'share', icon: 'share-2' },
+            { id: 'email', name: 'Send by Email', description: 'Email PDF directly', category: 'share', icon: 'mail' },
+            { id: 'embed', name: 'Embed Code', description: 'Get embed code for websites', category: 'share', icon: 'code' },
+            { id: 'export-zip', name: 'Export as ZIP', description: 'Download multiple files as ZIP', category: 'share', icon: 'archive' }
+        ];
+
+        // Icon SVGs
+        const iconSVGs = {
+            'file-text': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+            'table': '<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>',
+            'presentation': '<path d="M2 3h20M2 3v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V3M12 16v5M8 21h8"/>',
+            'image': '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
+            'align-left': '<line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/>',
+            'file-plus': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>',
+            'code': '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+            'hash': '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>',
+            'book': '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+            'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
+            'edit-3': '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+            'trash-2': '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>',
+            'square': '<rect x="3" y="3" width="18" height="18" rx="2"/>',
+            'edit-2': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+            'droplet': '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
+            'x-circle': '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',
+            'layers': '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+            'crop': '<path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"/><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"/>',
+            'rotate-cw': '<polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>',
+            'maximize-2': '<polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>',
+            'link': '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+            'bold': '<path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>',
+            'git-merge': '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/>',
+            'scissors': '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>',
+            'list': '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>',
+            'trash': '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+            'file-minus': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/>',
+            'copy': '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+            'file': '<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>',
+            'minimize-2': '<polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/>',
+            'lock': '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+            'unlock': '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/>',
+            'key': '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
+            'shield': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+            'shield-off': '<path d="M19.69 14a6.9 6.9 0 0 0 .31-2V5l-8-3-3.16 1.18"/><path d="M4.73 4.73L4 5v7c0 6 8 10 8 10a20.29 20.29 0 0 0 5.62-4.38"/><line x1="1" y1="1" x2="23" y2="23"/>',
+            'eye-off': '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>',
+            'pen-tool': '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
+            'underline': '<path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/><line x1="4" y1="21" x2="20" y2="21"/>',
+            'minus': '<line x1="5" y1="12" x2="19" y2="12"/>',
+            'message-square': '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+            'message-circle': '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+            'check-square': '<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+            'download': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+            'edit': '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+            'text-cursor': '<path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/><line x1="12" y1="6" x2="12" y2="18"/>',
+            'circle': '<circle cx="12" cy="12" r="10"/>',
+            'chevron-down': '<polyline points="6 9 12 15 18 9"/>',
+            'x': '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+            'printer': '<polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+            'maximize': '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>',
+            'book-open': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+            'grid': '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+            'move': '<polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/>',
+            'share-2': '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+            'mail': '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+            'archive': '<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>'
+        };
+
+        function getIcon(iconName) {
+            return iconSVGs[iconName] || iconSVGs['file-text'];
+        }
+
+        function renderTools(tools) {
+            const grid = document.getElementById('toolsGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (tools.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            grid.innerHTML = tools.map(tool => `
+        <div class="tool-card" onclick="location.href='tool.html?tool=${tool.id}'">
+          <div class="tool-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              ${getIcon(tool.icon)}
+            </svg>
+          </div>
+          <h3 class="tool-card-title">${tool.name}</h3>
+          <p class="tool-card-description">${tool.description}</p>
+          <span class="tool-card-arrow">→</span>
+        </div>
+      `).join('');
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            if (category === 'all') {
+                renderTools(allTools);
+            } else {
+                renderTools(allTools.filter(t => t.category === category));
+            }
+        }
+
+        // Search tools
+        function searchTools(query) {
+            const q = query.toLowerCase().trim();
+            if (!q) {
+                renderTools(allTools);
+                return;
+            }
+
+            const filtered = allTools.filter(t =>
+                t.name.toLowerCase().includes(q) ||
+                t.description.toLowerCase().includes(q) ||
+                t.category.toLowerCase().includes(q)
+            );
+            renderTools(filtered);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTools(allTools);
+
+            // Tab clicks
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    filterByCategory(tab.dataset.category);
+                });
+            });
+
+            // Search input
+            document.getElementById('searchTools').addEventListener('input', (e) => {
+                searchTools(e.target.value);
+            });
+
+            // Check for hash in URL
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const tab = document.querySelector(`[data-category="${hash}"]`);
+                if (tab) {
+                    tab.click();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

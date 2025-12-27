@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PDF Tool - Process your PDF files easily">
+  <title>PDF Tool - PDF Tools</title>
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%234F46E5' rx='20' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='white' font-weight='bold'>P</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/tools.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/ux.css">
+
+  <!-- PDF Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">P</span>
+          <span>PDF<span class="text-gradient">Tools</span></span>
+        </a>
+
+        <nav class="nav" id="nav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="tools.html" class="nav-link">All Tools</a>
+          <a href="editor.html" class="nav-link">Editor</a>
+          <a href="converter.html" class="nav-link">Convert</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5" />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+          </button>
+
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">All Tools</a>
+      <a href="editor.html" class="nav-link">Editor</a>
+      <a href="converter.html" class="nav-link">Convert</a>
+    </nav>
+  </div>
+
+  <!-- Main Tool Section -->
+  <section class="section" style="padding-top: 120px;">
+    <div class="container container-sm">
+      <!-- Tool Header -->
+      <div class="text-center mb-8">
+        <div class="tool-card-icon" id="toolIcon"
+          style="width: 80px; height: 80px; margin: 0 auto var(--space-4); font-size: 32px;">
+          📄
+        </div>
+        <h1 class="section-title" id="toolTitle">PDF Tool</h1>
+        <p class="section-description" id="toolDescription">Process your PDF files</p>
+      </div>
+
+      <!-- Step Flow Indicator -->
+      <div id="stepFlowContainer"></div>
+
+      <!-- Help Text Container -->
+      <div id="helpContainer" class="mb-4"></div>
+
+      <!-- Error Container -->
+      <div id="errorContainer" class="mb-4 hidden"></div>
+
+      <!-- Upload Area -->
+      <div class="dropzone" id="dropzone">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+        <h3 class="dropzone-title">Drop your files here</h3>
+        <p class="dropzone-subtitle">or click to browse</p>
+        <p class="dropzone-hint" id="acceptedFormats">Supports PDF files</p>
+        <input type="file" id="fileInput" accept=".pdf" multiple hidden>
+      </div>
+
+      <!-- File List -->
+      <div class="file-list mt-6" id="fileList"></div>
+
+      <!-- Tool Options (dynamic based on tool) -->
+      <div class="card mt-6 hidden" id="toolOptions">
+        <h3 class="text-lg font-semibold mb-4">Options</h3>
+        <div id="optionsContent"></div>
+      </div>
+
+      <!-- Progress -->
+      <div class="mt-6 hidden" id="progressContainer">
+        <div class="flex justify-between mb-2">
+          <span class="text-sm font-medium">Processing...</span>
+          <span class="text-sm" id="progressPercent">0%</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-4 mt-6" id="actionButtons" style="display: none;">
+        <button class="btn btn-secondary flex-1" id="clearBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          </svg>
+          Clear All
+        </button>
+        <button class="btn btn-primary flex-1" id="processBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span id="processBtnText">Process</span>
+        </button>
+      </div>
+
+      <!-- Result Area -->
+      <div class="card mt-6 hidden" id="resultArea">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="file-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="font-semibold" id="resultFileName">output.pdf</div>
+            <div class="text-sm text-muted" id="resultFileSize">0 KB</div>
+          </div>
+        </div>
+        <button class="btn btn-primary w-100" id="downloadBtn" style="width: 100%;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Download Result
+        </button>
+      </div>
+
+      <!-- PDF Preview -->
+      <div class="card mt-6 hidden" id="previewArea">
+        <h3 class="text-lg font-semibold mb-4">Preview</h3>
+        <div id="pdfPreview"
+          style="max-height: 500px; overflow-y: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <p class="footer-copyright">© 2024 PDF Tools. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="pages/privacy.html" class="footer-link">Privacy</a>
+          <a href="pages/terms.html" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/pdfCore.js"></script>
+  <script src="js/converter.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/ux.js"></script>
+  <script>
+    // Get tool from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolId = urlParams.get('tool') || 'merge';
+
+    // Tool configurations
+    const toolConfigs = {
+      'merge': {
+        name: 'Merge PDF',
+        description: 'Combine multiple PDF files into one document',
+        icon: '📑',
+        accept: '.pdf',
+        multiple: true,
+        buttonText: 'Merge PDFs',
+        process: 'mergePDFs'
+      },
+      'split': {
+        name: 'Split PDF',
+        description: 'Separate a PDF into multiple files',
+        icon: '✂️',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Split PDF',
+        process: 'splitPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Split Method</label>
+            <select class="input" id="splitMethod">
+              <option value="all">Extract all pages separately</option>
+              <option value="range">Extract page range</option>
+              <option value="interval">Split every N pages</option>
+            </select>
+          </div>
+          <div id="rangeOptions" class="hidden">
+            <label class="font-medium mb-2" style="display: block;">Page Range (e.g., 1-3, 5, 7-10)</label>
+            <input type="text" class="input" id="pageRange" placeholder="1-3, 5, 7-10">
+          </div>
+          <div id="intervalOptions" class="hidden">
+            <label class="font-medium mb-2" style="display: block;">Pages per file</label>
+            <input type="number" class="input" id="splitInterval" value="1" min="1">
+          </div>
+        `
+      },
+      'compress': {
+        name: 'Compress PDF',
+        description: 'Reduce PDF file size while maintaining quality',
+        icon: '📦',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Compress PDF',
+        process: 'compressPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Compression Level</label>
+            <select class="input" id="compressionLevel">
+              <option value="low">Low (Best Quality)</option>
+              <option value="medium" selected>Medium (Balanced)</option>
+              <option value="high">High (Smallest Size)</option>
+            </select>
+          </div>
+        `
+      },
+      'rotate-pages': {
+        name: 'Rotate Pages',
+        description: 'Rotate PDF pages by 90, 180, or 270 degrees',
+        icon: '🔄',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Rotate Pages',
+        process: 'rotatePDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Rotation Angle</label>
+            <select class="input" id="rotationAngle">
+              <option value="90">90° Clockwise</option>
+              <option value="180">180°</option>
+              <option value="270">90° Counter-clockwise</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Apply to</label>
+            <select class="input" id="rotatePages">
+              <option value="all">All Pages</option>
+              <option value="odd">Odd Pages Only</option>
+              <option value="even">Even Pages Only</option>
+              <option value="custom">Custom Range</option>
+            </select>
+          </div>
+        `
+      },
+      'protect': {
+        name: 'Protect PDF',
+        description: 'Add password protection to your PDF',
+        icon: '🔒',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Protect PDF',
+        process: 'protectPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Password</label>
+            <input type="password" class="input" id="pdfPassword" placeholder="Enter password">
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Confirm Password</label>
+            <input type="password" class="input" id="pdfPasswordConfirm" placeholder="Confirm password">
+          </div>
+        `
+      },
+      'unlock': {
+        name: 'Unlock PDF',
+        description: 'Remove password from a protected PDF',
+        icon: '🔓',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Unlock PDF',
+        process: 'unlockPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Current Password</label>
+            <input type="password" class="input" id="currentPassword" placeholder="Enter current password">
+          </div>
+        `
+      },
+      'pdf-to-image': {
+        name: 'PDF to Image',
+        description: 'Convert PDF pages to PNG or JPG images',
+        icon: '🖼️',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Convert to Images',
+        process: 'pdfToImage',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Image Format</label>
+            <select class="input" id="imageFormat">
+              <option value="png">PNG (Lossless)</option>
+              <option value="jpeg">JPG (Smaller Size)</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Quality</label>
+            <select class="input" id="imageQuality">
+              <option value="1">Standard (72 DPI)</option>
+              <option value="2" selected>High (150 DPI)</option>
+              <option value="3">Best (300 DPI)</option>
+            </select>
+          </div>
+        `
+      },
+      'image-to-pdf': {
+        name: 'Image to PDF',
+        description: 'Convert images to a PDF document',
+        icon: '📷',
+        accept: '.png,.jpg,.jpeg,.gif,.webp,.bmp',
+        multiple: true,
+        buttonText: 'Convert to PDF',
+        process: 'imageToPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Page Size</label>
+            <select class="input" id="pageSize">
+              <option value="fit">Fit to Image</option>
+              <option value="a4">A4</option>
+              <option value="letter">Letter</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Orientation</label>
+            <select class="input" id="orientation">
+              <option value="auto">Auto</option>
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </div>
+        `
+      },
+      'add-watermark': {
+        name: 'Add Watermark',
+        description: 'Add text or image watermark to PDF',
+        icon: '💧',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Add Watermark',
+        process: 'addWatermark',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Watermark Text</label>
+            <input type="text" class="input" id="watermarkText" placeholder="CONFIDENTIAL">
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Position</label>
+            <select class="input" id="watermarkPosition">
+              <option value="center">Center</option>
+              <option value="diagonal">Diagonal</option>
+              <option value="top">Top</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Opacity</label>
+            <input type="range" id="watermarkOpacity" min="10" max="100" value="30" style="width: 100%;">
+            <span id="opacityValue">30%</span>
+          </div>
+        `
+      },
+      'page-numbers': {
+        name: 'Add Page Numbers',
+        description: 'Add page numbering to your PDF',
+        icon: '#️⃣',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Add Numbers',
+        process: 'addPageNumbers',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Position</label>
+            <select class="input" id="numberPosition">
+              <option value="bottom-center">Bottom Center</option>
+              <option value="bottom-right">Bottom Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="top-center">Top Center</option>
+              <option value="top-right">Top Right</option>
+              <option value="top-left">Top Left</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Format</label>
+            <select class="input" id="numberFormat">
+              <option value="1">1, 2, 3...</option>
+              <option value="Page 1">Page 1, Page 2...</option>
+              <option value="- 1 -">- 1 -, - 2 -...</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Start from page</label>
+            <input type="number" class="input" id="startPage" value="1" min="1">
+          </div>
+        `
+      },
+      'extract-pages': {
+        name: 'Extract Pages',
+        description: 'Extract specific pages from PDF',
+        icon: '📄',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Extract Pages',
+        process: 'extractPages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Pages to Extract (e.g., 1-3, 5, 7-10)</label>
+            <input type="text" class="input" id="extractRange" placeholder="1-3, 5, 7-10">
+          </div>
+        `
+      },
+      'delete-pages': {
+        name: 'Delete Pages',
+        description: 'Remove specific pages from PDF',
+        icon: '🗑️',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Delete Pages',
+        process: 'deletePages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Pages to Delete (e.g., 1-3, 5, 7-10)</label>
+            <input type="text" class="input" id="deleteRange" placeholder="1-3, 5, 7-10">
+          </div>
+        `
+      }
+    };
+
+    // Current state
+    let uploadedFiles = [];
+    let resultBlob = null;
+    let resultFiles = [];
+
+    // Initialize tool
+    function initTool() {
+      const config = toolConfigs[toolId] || toolConfigs['merge'];
+
+      // Update page
+      document.title = `${config.name} - PDF Tools`;
+      document.getElementById('toolTitle').textContent = config.name;
+      document.getElementById('toolDescription').textContent = config.description;
+      document.getElementById('toolIcon').innerHTML = `<span style="font-size: 40px;">${config.icon}</span>`;
+      document.getElementById('processBtnText').textContent = config.buttonText;
+      document.getElementById('fileInput').setAttribute('accept', config.accept);
+      document.getElementById('fileInput').multiple = config.multiple;
+      document.getElementById('acceptedFormats').textContent = `Supports: ${config.accept.replace(/\./g, '').toUpperCase()}`;
+
+      // Show options if available
+      if (config.options) {
+        document.getElementById('toolOptions').classList.remove('hidden');
+        document.getElementById('optionsContent').innerHTML = config.options;
+        initOptionListeners();
+      }
+    }
+
+    // Initialize option listeners
+    function initOptionListeners() {
+      // Split method toggle
+      const splitMethod = document.getElementById('splitMethod');
+      if (splitMethod) {
+        splitMethod.addEventListener('change', () => {
+          document.getElementById('rangeOptions')?.classList.toggle('hidden', splitMethod.value !== 'range');
+          document.getElementById('intervalOptions')?.classList.toggle('hidden', splitMethod.value !== 'interval');
+        });
+      }
+
+      // Opacity slider
+      const opacitySlider = document.getElementById('watermarkOpacity');
+      if (opacitySlider) {
+        opacitySlider.addEventListener('input', () => {
+          document.getElementById('opacityValue').textContent = opacitySlider.value + '%';
+        });
+      }
+    }
+
+    // File handling
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.classList.add('dragover');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+      dropzone.classList.remove('dragover');
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      handleFileUpload(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFileUpload(e.target.files);
+    });
+
+    function handleFileUpload(files) {
+      Array.from(files).forEach(file => {
+        uploadedFiles.push({
+          id: Math.random().toString(36).substr(2, 9),
+          file: file,
+          name: file.name,
+          size: file.size
+        });
+      });
+
+      updateFileList();
+      document.getElementById('actionButtons').style.display = 'flex';
+      PDFTools.showToast('success', 'Files Added', `${files.length} file(s) added`);
+    }
+
+    function updateFileList() {
+      const fileList = document.getElementById('fileList');
+
+      if (uploadedFiles.length === 0) {
+        fileList.innerHTML = '';
+        document.getElementById('actionButtons').style.display = 'none';
+        return;
+      }
+
+      fileList.innerHTML = uploadedFiles.map((f, i) => `
+        <div class="file-item" data-id="${f.id}">
+          <div class="file-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="file-info">
+            <div class="file-name">${f.name}</div>
+            <div class="file-meta">
+              <span>${PDFTools.formatFileSize(f.size)}</span>
+            </div>
+          </div>
+          <div class="file-actions">
+            ${i > 0 ? `<button class="file-action" onclick="moveFile(${i}, -1)" title="Move up" style="background: var(--bg-secondary);">↑</button>` : ''}
+            ${i < uploadedFiles.length - 1 ? `<button class="file-action" onclick="moveFile(${i}, 1)" title="Move down" style="background: var(--bg-secondary);">↓</button>` : ''}
+            <button class="file-action" onclick="removeFile('${f.id}')" title="Remove">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeFile(id) {
+      uploadedFiles = uploadedFiles.filter(f => f.id !== id);
+      updateFileList();
+    }
+
+    function moveFile(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= uploadedFiles.length) return;
+      [uploadedFiles[index], uploadedFiles[newIndex]] = [uploadedFiles[newIndex], uploadedFiles[index]];
+      updateFileList();
+    }
+
+    // Clear button
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      uploadedFiles = [];
+      updateFileList();
+      document.getElementById('resultArea').classList.add('hidden');
+      document.getElementById('previewArea').classList.add('hidden');
+      fileInput.value = '';
+    });
+
+    // Process button
+    document.getElementById('processBtn').addEventListener('click', async () => {
+      if (uploadedFiles.length === 0) {
+        PDFTools.showToast('error', 'No Files', 'Please add files first');
+        return;
+      }
+
+      const config = toolConfigs[toolId];
+      const processFunc = window[config.process];
+
+      if (typeof processFunc === 'function') {
+        try {
+          showProgress(0);
+          await processFunc(uploadedFiles);
+        } catch (error) {
+          console.error(error);
+          PDFTools.showToast('error', 'Error', error.message || 'Processing failed');
+          hideProgress();
+        }
+      } else {
+        PDFTools.showToast('error', 'Error', 'Tool not implemented yet');
+      }
+    });
+
+    // Progress functions
+    function showProgress(percent) {
+      const container = document.getElementById('progressContainer');
+      const bar = document.getElementById('progressBar');
+      const text = document.getElementById('progressPercent');
+
+      container.classList.remove('hidden');
+      bar.style.width = percent + '%';
+      text.textContent = Math.round(percent) + '%';
+    }
+
+    function hideProgress() {
+      document.getElementById('progressContainer').classList.add('hidden');
+    }
+
+    // Show result
+    function showResult(blob, fileName) {
+      resultBlob = blob;
+      hideProgress();
+
+      document.getElementById('resultArea').classList.remove('hidden');
+      document.getElementById('resultFileName').textContent = fileName;
+      document.getElementById('resultFileSize').textContent = PDFTools.formatFileSize(blob.size);
+
+      PDFTools.showToast('success', 'Complete!', 'Your file is ready to download');
+    }
+
+    // Download button
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      if (resultBlob) {
+        const fileName = document.getElementById('resultFileName').textContent;
+        saveAs(resultBlob, fileName);
+      } else if (resultFiles.length > 0) {
+        // Multiple files - create ZIP
+        downloadAsZip();
+      }
+    });
+
+    async function downloadAsZip() {
+      const zip = new JSZip();
+      resultFiles.forEach((f, i) => {
+        zip.file(f.name, f.blob);
+      });
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      saveAs(zipBlob, 'pdf-tools-output.zip');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', initTool);
+  </script>
+</body>
+
+</html>

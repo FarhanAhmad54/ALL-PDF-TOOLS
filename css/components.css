@@ -1,0 +1,292 @@
+/* ============================================
+   PDF Tools - Component Styles
+   ============================================ */
+
+/* HEADER / NAVIGATION */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    padding: var(--space-4) 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all var(--transition-base);
+}
+
+.header.scrolled {
+    padding: var(--space-3) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: var(--text-lg);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.nav-link {
+    padding: var(--space-2) var(--space-4);
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.nav-link.active {
+    color: var(--primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+/* Mobile Nav Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-2);
+    background: none;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+/* THEME TOGGLE */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-tertiary);
+    color: var(--primary);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: all var(--transition-base);
+}
+
+.theme-toggle .icon-sun {
+    position: absolute;
+    transform: scale(0) rotate(-90deg);
+}
+
+.theme-toggle .icon-moon {
+    position: absolute;
+    transform: scale(1) rotate(0);
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+    transform: scale(1) rotate(0);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+    transform: scale(0) rotate(90deg);
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.hero-gradient {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: var(--gradient-hero);
+    opacity: 0.15;
+    filter: blur(100px);
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+}
+
+.hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+}
+
+.hero-orb-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--primary);
+    top: 20%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.hero-orb-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--secondary);
+    bottom: 20%;
+    left: 10%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 100ms;
+    opacity: 0;
+}
+
+.hero-title .highlight {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: var(--space-8);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 200ms;
+    opacity: 0;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 300ms;
+    opacity: 0;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+    margin-top: var(--space-16);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 400ms;
+    opacity: 0;
+}
+
+.hero-stat {
+    text-align: center;
+}
+
+.hero-stat-value {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.hero-stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+}
