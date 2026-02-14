@@ -476,6 +476,440 @@
             <input type="text" class="input" id="deleteRange" placeholder="1-3, 5, 7-10">
           </div>
         `
+      },
+      'pdf-to-text': {
+        name: 'PDF to Text',
+        description: 'Extract all text content from a PDF file',
+        icon: '📝',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Extract Text',
+        process: 'pdfToText'
+      },
+      'text-to-pdf': {
+        name: 'Text to PDF',
+        description: 'Convert plain text file to a PDF document',
+        icon: '📄',
+        accept: '.txt,.text,.md,.csv',
+        multiple: false,
+        buttonText: 'Convert to PDF',
+        process: 'textToPDF',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Font Size</label>
+            <select class="input" id="txtFontSize">
+              <option value="10">Small (10pt)</option>
+              <option value="12" selected>Medium (12pt)</option>
+              <option value="14">Large (14pt)</option>
+              <option value="16">Extra Large (16pt)</option>
+            </select>
+          </div>
+        `
+      },
+      'reorder': {
+        name: 'Reorder Pages',
+        description: 'Rearrange the order of pages in your PDF',
+        icon: '🔀',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Reorder Pages',
+        process: 'reorderPages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">New Page Order (comma-separated, e.g., 3,1,2,4)</label>
+            <input type="text" class="input" id="pageOrder" placeholder="3, 1, 2, 4">
+          </div>
+        `
+      },
+      'duplicate-pages': {
+        name: 'Duplicate Pages',
+        description: 'Copy specific pages within your PDF',
+        icon: '📋',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Duplicate Pages',
+        process: 'duplicatePages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Pages to Duplicate (e.g., 1-3, 5)</label>
+            <input type="text" class="input" id="dupRange" placeholder="1-3, 5">
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Number of Copies</label>
+            <input type="number" class="input" id="dupCopies" value="2" min="2" max="10">
+          </div>
+        `
+      },
+      'add-blank': {
+        name: 'Add Blank Pages',
+        description: 'Insert empty pages into your PDF',
+        icon: '📃',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Add Blank Pages',
+        process: 'addBlankPages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Number of Pages</label>
+            <input type="number" class="input" id="blankCount" value="1" min="1" max="50">
+          </div>
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Position</label>
+            <select class="input" id="blankPosition">
+              <option value="end">At End</option>
+              <option value="start">At Beginning</option>
+            </select>
+          </div>
+        `
+      },
+      'resize-pages': {
+        name: 'Resize Pages',
+        description: 'Change PDF page dimensions to a different size',
+        icon: '📐',
+        accept: '.pdf',
+        multiple: false,
+        buttonText: 'Resize Pages',
+        process: 'resizePages',
+        options: `
+          <div class="mb-4">
+            <label class="font-medium mb-2" style="display: block;">Target Page Size</label>
+            <select class="input" id="targetPageSize">
+              <option value="a4">A4 (210 x 297 mm)</option>
+              <option value="letter">US Letter (8.5 x 11 in)</option>
+              <option value="legal">US Legal (8.5 x 14 in)</option>
+              <option value="a3">A3 (297 x 420 mm)</option>
+              <option value="a5">A5 (148 x 210 mm)</option>
+            </select>
+          </div>
+        `
+      },
+      'invoice-generator': {
+        name: 'Invoice Generator',
+        description: 'Create professional invoices as PDF',
+        icon: '🧾',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Invoice',
+        process: 'generateInvoice',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Your Company Name</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Client Name</label><input type="text" class="input" id="biz-client" placeholder="Client Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Invoice Number</label><input type="text" class="input" id="biz-invno" placeholder="INV-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Items (Description|Qty|Price, one per line)</label><textarea class="input" id="biz-items" rows="5" placeholder="Web Design|1|500&#10;Hosting|12|25"></textarea></div>
+        `
+      },
+      'receipt-generator': {
+        name: 'Receipt Generator',
+        description: 'Create payment receipts as PDF',
+        icon: '🧾',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Receipt',
+        process: 'generateReceipt',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Business Name</label><input type="text" class="input" id="biz-company" placeholder="Your Business"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Customer Name</label><input type="text" class="input" id="biz-client" placeholder="Customer"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Receipt Number</label><input type="text" class="input" id="biz-recno" placeholder="REC-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Payment Method</label><select class="input" id="biz-paymethod"><option>Cash</option><option>Credit Card</option><option>Bank Transfer</option><option>Check</option></select></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Items (Item|Qty|Price, one per line)</label><textarea class="input" id="biz-items" rows="4" placeholder="Product A|2|25"></textarea></div>
+        `
+      },
+      'letterhead-generator': {
+        name: 'Letterhead Generator',
+        description: 'Create professional letterhead PDF',
+        icon: '✉️',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Letterhead',
+        process: 'generateLetterhead',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Company Name</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Address</label><input type="text" class="input" id="biz-address" placeholder="123 Business St, City"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Phone</label><input type="text" class="input" id="biz-phone" placeholder="(555) 123-4567"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Email</label><input type="text" class="input" id="biz-email" placeholder="info@company.com"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Letter Content</label><textarea class="input" id="biz-body" rows="8" placeholder="Dear Sir/Madam,&#10;&#10;..."></textarea></div>
+        `
+      },
+      'contract-generator': {
+        name: 'Contract Template',
+        description: 'Generate contract PDF with terms',
+        icon: '📜',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Contract',
+        process: 'generateContract',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">First Party</label><input type="text" class="input" id="biz-party1" placeholder="Party A / Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Second Party</label><input type="text" class="input" id="biz-party2" placeholder="Party B / Client"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Terms & Conditions</label><textarea class="input" id="biz-terms" rows="8" placeholder="1. Both parties agree to...&#10;2. Payment terms...&#10;3. Duration..."></textarea></div>
+        `
+      },
+      'nda-generator': {
+        name: 'NDA Generator',
+        description: 'Create Non-Disclosure Agreement PDF',
+        icon: '🤝',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate NDA',
+        process: 'generateNDA',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Disclosing Party</label><input type="text" class="input" id="biz-party1" placeholder="Disclosing Party Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Receiving Party</label><input type="text" class="input" id="biz-party2" placeholder="Receiving Party Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Duration</label><select class="input" id="biz-duration"><option>1 year</option><option>2 years</option><option>3 years</option><option>5 years</option><option>Indefinite</option></select></div>
+        `
+      },
+      'business-card-generator': {
+        name: 'Business Card PDF',
+        description: 'Create printable business card PDF',
+        icon: '💳',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Business Card',
+        process: 'generateBusinessCard',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Full Name</label><input type="text" class="input" id="biz-name" placeholder="John Doe"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Job Title</label><input type="text" class="input" id="biz-title" placeholder="CEO"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Company</label><input type="text" class="input" id="biz-company" placeholder="Company Inc."></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Phone</label><input type="text" class="input" id="biz-phone" placeholder="(555) 123-4567"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Email</label><input type="text" class="input" id="biz-email" placeholder="john@company.com"></div>
+        `
+      },
+      'report-generator': {
+        name: 'Report Template',
+        description: 'Generate professional report PDF',
+        icon: '📊',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Report',
+        process: 'generateReport',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Report Title</label><input type="text" class="input" id="biz-title" placeholder="Monthly Report"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Author</label><input type="text" class="input" id="biz-author" placeholder="Author Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Report Content</label><textarea class="input" id="biz-body" rows="10" placeholder="Executive Summary&#10;&#10;Key Findings...&#10;&#10;Recommendations..."></textarea></div>
+        `
+      },
+      'expense-report-generator': {
+        name: 'Expense Report',
+        description: 'Create expense report PDF',
+        icon: '💰',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Expense Report',
+        process: 'generateExpenseReport',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Employee Name</label><input type="text" class="input" id="biz-name" placeholder="Employee Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Department</label><input type="text" class="input" id="biz-dept" placeholder="Marketing"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Period</label><input type="text" class="input" id="biz-period" placeholder="January 2024"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Expenses (Category|Amount, one per line)</label><textarea class="input" id="biz-items" rows="5" placeholder="Travel|150&#10;Meals|75&#10;Supplies|50"></textarea></div>
+        `
+      },
+      'timesheet-generator': {
+        name: 'Timesheet Generator',
+        description: 'Create weekly timesheet PDF',
+        icon: '⏰',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Timesheet',
+        process: 'generateTimesheet',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Employee Name</label><input type="text" class="input" id="biz-name" placeholder="Employee Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Period</label><input type="text" class="input" id="biz-period" placeholder="Week of Jan 1, 2024"></div>
+        `
+      },
+      'meeting-minutes-generator': {
+        name: 'Meeting Minutes',
+        description: 'Create meeting minutes PDF',
+        icon: '📋',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Minutes',
+        process: 'generateMeetingMinutes',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Meeting Title</label><input type="text" class="input" id="biz-title" placeholder="Team Meeting"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Attendees</label><input type="text" class="input" id="biz-attendees" placeholder="John, Jane, Bob"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Notes</label><textarea class="input" id="biz-body" rows="8" placeholder="Agenda:&#10;1. Project updates&#10;2. Action items"></textarea></div>
+        `
+      },
+      'proposal-generator': {
+        name: 'Proposal Generator',
+        description: 'Create business proposal PDF',
+        icon: '📑',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Proposal',
+        process: 'generateProposal',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Your Company</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Client Company</label><input type="text" class="input" id="biz-client" placeholder="Client Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Proposal Title</label><input type="text" class="input" id="biz-title" placeholder="Project Proposal"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Proposal Content</label><textarea class="input" id="biz-body" rows="10" placeholder="Objective:&#10;&#10;Scope of Work:&#10;&#10;Timeline:&#10;&#10;Budget:"></textarea></div>
+        `
+      },
+      'purchase-order-generator': {
+        name: 'Purchase Order',
+        description: 'Create purchase order PDF',
+        icon: '🛒',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate PO',
+        process: 'generatePurchaseOrder',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Your Company</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Vendor</label><input type="text" class="input" id="biz-client" placeholder="Vendor Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">PO Number</label><input type="text" class="input" id="biz-invno" placeholder="PO-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Items (Item|Qty|Unit Price, one per line)</label><textarea class="input" id="biz-items" rows="5" placeholder="Item A|10|25&#10;Item B|5|50"></textarea></div>
+        `
+      },
+      'packing-slip-generator': {
+        name: 'Packing Slip',
+        description: 'Create shipping packing slip PDF',
+        icon: '📦',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Packing Slip',
+        process: 'generatePackingSlip',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Your Company</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Ship To</label><input type="text" class="input" id="biz-client" placeholder="Recipient Address"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Order Number</label><input type="text" class="input" id="biz-invno" placeholder="ORD-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Items (Item|Qty, one per line)</label><textarea class="input" id="biz-items" rows="5" placeholder="Product A|5&#10;Product B|3"></textarea></div>
+        `
+      },
+      'certificate-generator': {
+        name: 'Certificate Generator',
+        description: 'Create award/completion certificates',
+        icon: '🏆',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Certificate',
+        process: 'generateCertificate',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Certificate Title</label><input type="text" class="input" id="biz-title" placeholder="Certificate of Completion"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Recipient Name</label><input type="text" class="input" id="biz-name" placeholder="Recipient Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Description</label><input type="text" class="input" id="biz-body" placeholder="Has successfully completed the program"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Issuing Organization</label><input type="text" class="input" id="biz-company" placeholder="Organization Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+        `
+      },
+      'payslip-generator': {
+        name: 'Payslip Generator',
+        description: 'Create employee payslip PDF',
+        icon: '💵',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Payslip',
+        process: 'generatePayslip',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Company Name</label><input type="text" class="input" id="biz-company" placeholder="Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Employee Name</label><input type="text" class="input" id="biz-name" placeholder="Employee"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Employee ID</label><input type="text" class="input" id="biz-empid" placeholder="EMP-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Pay Period</label><input type="text" class="input" id="biz-period" placeholder="January 2024"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Basic Salary ($)</label><input type="number" class="input" id="biz-basic" placeholder="5000"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Allowances ($)</label><input type="number" class="input" id="biz-allowance" placeholder="1000"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Deductions ($)</label><input type="number" class="input" id="biz-deductions" placeholder="500"></div>
+        `
+      },
+      'memo-generator': {
+        name: 'Memo Template',
+        description: 'Create office memorandum PDF',
+        icon: '📝',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Memo',
+        process: 'generateMemo',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">To</label><input type="text" class="input" id="biz-to" placeholder="Recipient"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">From</label><input type="text" class="input" id="biz-from" placeholder="Sender"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Subject</label><input type="text" class="input" id="biz-title" placeholder="Subject"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Content</label><textarea class="input" id="biz-body" rows="8" placeholder="Memo content..."></textarea></div>
+        `
+      },
+      'agenda-generator': {
+        name: 'Agenda Creator',
+        description: 'Create meeting agenda PDF',
+        icon: '📅',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Agenda',
+        process: 'generateAgenda',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Meeting Title</label><input type="text" class="input" id="biz-title" placeholder="Team Meeting"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Time</label><input type="text" class="input" id="biz-time" placeholder="10:00 AM"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Location</label><input type="text" class="input" id="biz-location" placeholder="Conference Room A"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Agenda Items</label><textarea class="input" id="biz-body" rows="6" placeholder="1. Opening remarks&#10;2. Review of action items&#10;3. Discussion"></textarea></div>
+        `
+      },
+      'company-profile-generator': {
+        name: 'Company Profile',
+        description: 'Create company profile PDF',
+        icon: '🏢',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Profile',
+        process: 'generateCompanyProfile',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Company Name</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Year Founded</label><input type="text" class="input" id="biz-founded" placeholder="2020"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Mission Statement</label><input type="text" class="input" id="biz-mission" placeholder="Our mission is to..."></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Profile Content</label><textarea class="input" id="biz-body" rows="10" placeholder="About Us:&#10;&#10;Our Services:&#10;&#10;Our Team:&#10;&#10;Contact:"></textarea></div>
+        `
+      },
+      'quotation-generator': {
+        name: 'Quotation Generator',
+        description: 'Create price quotation PDF',
+        icon: '💲',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Quotation',
+        process: 'generateQuotation',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Your Company</label><input type="text" class="input" id="biz-company" placeholder="Your Company"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Client</label><input type="text" class="input" id="biz-client" placeholder="Client Name"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Quote Number</label><input type="text" class="input" id="biz-invno" placeholder="QT-001"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Valid For</label><select class="input" id="biz-validity"><option>15 days</option><option>30 days</option><option>60 days</option><option>90 days</option></select></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Items (Description|Qty|Rate, one per line)</label><textarea class="input" id="biz-items" rows="5" placeholder="Service A|1|500&#10;Service B|2|250"></textarea></div>
+        `
+      },
+      'attendance-generator': {
+        name: 'Attendance Sheet',
+        description: 'Create attendance tracking sheet PDF',
+        icon: '✅',
+        accept: '.pdf',
+        multiple: false,
+        noUpload: true,
+        buttonText: 'Generate Attendance Sheet',
+        process: 'generateAttendance',
+        options: `
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Title</label><input type="text" class="input" id="biz-title" placeholder="Team Attendance"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Date</label><input type="date" class="input" id="biz-date"></div>
+          <div class="mb-4"><label class="font-medium mb-2" style="display:block;">Names (one per line)</label><textarea class="input" id="biz-names" rows="8" placeholder="Employee 1&#10;Employee 2&#10;Employee 3"></textarea></div>
+        `
       }
     };
 
@@ -494,9 +928,17 @@
       document.getElementById('toolDescription').textContent = config.description;
       document.getElementById('toolIcon').innerHTML = `<span style="font-size: 40px;">${config.icon}</span>`;
       document.getElementById('processBtnText').textContent = config.buttonText;
-      document.getElementById('fileInput').setAttribute('accept', config.accept);
-      document.getElementById('fileInput').multiple = config.multiple;
-      document.getElementById('acceptedFormats').textContent = `Supports: ${config.accept.replace(/\./g, '').toUpperCase()}`;
+
+      // Handle no-upload tools (business generators)
+      if (config.noUpload) {
+        document.getElementById('dropzone').style.display = 'none';
+        document.getElementById('actionButtons').style.display = 'flex';
+        document.getElementById('clearBtn').style.display = 'none';
+      } else {
+        document.getElementById('fileInput').setAttribute('accept', config.accept);
+        document.getElementById('fileInput').multiple = config.multiple;
+        document.getElementById('acceptedFormats').textContent = `Supports: ${config.accept.replace(/\./g, '').toUpperCase()}`;
+      }
 
       // Show options if available
       if (config.options) {
@@ -624,18 +1066,22 @@
 
     // Process button
     document.getElementById('processBtn').addEventListener('click', async () => {
-      if (uploadedFiles.length === 0) {
+      const config = toolConfigs[toolId];
+      if (!config.noUpload && uploadedFiles.length === 0) {
         PDFTools.showToast('error', 'No Files', 'Please add files first');
         return;
       }
 
-      const config = toolConfigs[toolId];
       const processFunc = window[config.process];
 
       if (typeof processFunc === 'function') {
         try {
           showProgress(0);
-          await processFunc(uploadedFiles);
+          if (config.noUpload) {
+            await processFunc();
+          } else {
+            await processFunc(uploadedFiles);
+          }
         } catch (error) {
           console.error(error);
           PDFTools.showToast('error', 'Error', error.message || 'Processing failed');

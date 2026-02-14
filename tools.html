@@ -97,10 +97,9 @@
                     <button class="tab" data-category="edit">✏️ Edit</button>
                     <button class="tab" data-category="manage">🗂️ Organize</button>
                     <button class="tab" data-category="security">🔐 Security</button>
+                    <button class="tab" data-category="business">💼 Business</button>
                     <button class="tab" data-category="annotate">📌 Annotate</button>
                     <button class="tab" data-category="forms">🧾 Forms</button>
-                    <button class="tab" data-category="print">🖨️ Print</button>
-                    <button class="tab" data-category="share">📤 Share</button>
                 </div>
             </div>
         </div>
@@ -140,35 +139,16 @@
         // All tools data
         const allTools = [
             // Convert Tools
-            { id: 'pdf-to-word', name: 'PDF to Word', description: 'Convert PDF to editable Word document', category: 'convert', icon: 'file-text' },
-            { id: 'pdf-to-excel', name: 'PDF to Excel', description: 'Convert PDF tables to Excel spreadsheet', category: 'convert', icon: 'table' },
-            { id: 'pdf-to-ppt', name: 'PDF to PowerPoint', description: 'Convert PDF to PowerPoint presentation', category: 'convert', icon: 'presentation' },
             { id: 'pdf-to-image', name: 'PDF to Image', description: 'Convert PDF pages to PNG or JPG images', category: 'convert', icon: 'image' },
-            { id: 'pdf-to-text', name: 'PDF to Text', description: 'Extract text content from PDF', category: 'convert', icon: 'align-left' },
-            { id: 'word-to-pdf', name: 'Word to PDF', description: 'Convert Word documents to PDF', category: 'convert', icon: 'file-plus' },
-            { id: 'excel-to-pdf', name: 'Excel to PDF', description: 'Convert Excel spreadsheets to PDF', category: 'convert', icon: 'file-plus' },
-            { id: 'ppt-to-pdf', name: 'PowerPoint to PDF', description: 'Convert PowerPoint to PDF', category: 'convert', icon: 'file-plus' },
             { id: 'image-to-pdf', name: 'Image to PDF', description: 'Convert images to PDF document', category: 'convert', icon: 'image' },
-            { id: 'html-to-pdf', name: 'HTML to PDF', description: 'Convert HTML pages to PDF', category: 'convert', icon: 'code' },
-            { id: 'markdown-to-pdf', name: 'Markdown to PDF', description: 'Convert Markdown files to PDF', category: 'convert', icon: 'hash' },
+            { id: 'pdf-to-text', name: 'PDF to Text', description: 'Extract text content from PDF', category: 'convert', icon: 'align-left' },
             { id: 'text-to-pdf', name: 'Text to PDF', description: 'Convert plain text to PDF', category: 'convert', icon: 'file-text' },
-            { id: 'epub-to-pdf', name: 'EPUB to PDF', description: 'Convert EPUB ebooks to PDF', category: 'convert', icon: 'book' },
 
             // Edit Tools
-            { id: 'add-text', name: 'Add Text', description: 'Add new text anywhere on PDF', category: 'edit', icon: 'type' },
-            { id: 'edit-text', name: 'Edit Text', description: 'Modify existing text in PDF', category: 'edit', icon: 'edit-3' },
-            { id: 'remove-text', name: 'Remove Text', description: 'Delete text from PDF', category: 'edit', icon: 'trash-2' },
-            { id: 'add-shapes', name: 'Add Shapes', description: 'Draw rectangles, circles, and lines', category: 'edit', icon: 'square' },
-            { id: 'freehand-draw', name: 'Freehand Draw', description: 'Draw freely on PDF pages', category: 'edit', icon: 'edit-2' },
             { id: 'add-watermark', name: 'Add Watermark', description: 'Add text or image watermark', category: 'edit', icon: 'droplet' },
-            { id: 'remove-watermark', name: 'Remove Watermark', description: 'Remove watermarks from PDF', category: 'edit', icon: 'x-circle' },
-            { id: 'add-background', name: 'Add Background', description: 'Add background color or image', category: 'edit', icon: 'layers' },
-            { id: 'crop-pages', name: 'Crop Pages', description: 'Crop PDF page margins', category: 'edit', icon: 'crop' },
             { id: 'rotate-pages', name: 'Rotate Pages', description: 'Rotate PDF pages', category: 'edit', icon: 'rotate-cw' },
             { id: 'resize-pages', name: 'Resize Pages', description: 'Change PDF page dimensions', category: 'edit', icon: 'maximize-2' },
-            { id: 'add-images', name: 'Add Images', description: 'Insert images into PDF', category: 'edit', icon: 'image' },
-            { id: 'add-links', name: 'Add Links', description: 'Add hyperlinks to PDF', category: 'edit', icon: 'link' },
-            { id: 'change-font', name: 'Change Font', description: 'Modify font size and color', category: 'edit', icon: 'bold' },
+            { id: 'crop-pages', name: 'Crop Pages', description: 'Crop PDF page margins', category: 'edit', icon: 'crop' },
 
             // Manage/Organize Tools
             { id: 'merge', name: 'Merge PDF', description: 'Combine multiple PDFs into one', category: 'manage', icon: 'git-merge' },
@@ -180,51 +160,41 @@
             { id: 'add-blank', name: 'Add Blank Pages', description: 'Insert empty pages into PDF', category: 'manage', icon: 'file' },
             { id: 'page-numbers', name: 'Page Numbers', description: 'Add page numbering to PDF', category: 'manage', icon: 'hash' },
             { id: 'compress', name: 'Compress PDF', description: 'Reduce PDF file size', category: 'manage', icon: 'minimize-2' },
-            { id: 'table-of-contents', name: 'Table of Contents', description: 'Generate table of contents', category: 'manage', icon: 'list' },
 
             // Security Tools
             { id: 'protect', name: 'Add Password', description: 'Protect PDF with password', category: 'security', icon: 'lock' },
             { id: 'unlock', name: 'Remove Password', description: 'Remove password protection', category: 'security', icon: 'unlock' },
-            { id: 'change-password', name: 'Change Password', description: 'Update PDF password', category: 'security', icon: 'key' },
-            { id: 'permissions', name: 'Set Permissions', description: 'Control print/copy permissions', category: 'security', icon: 'shield' },
-            { id: 'encrypt', name: 'Encrypt PDF', description: 'Add encryption to PDF', category: 'security', icon: 'shield' },
-            { id: 'decrypt', name: 'Decrypt PDF', description: 'Remove encryption from PDF', category: 'security', icon: 'shield-off' },
-            { id: 'redact', name: 'Redact Content', description: 'Permanently remove sensitive info', category: 'security', icon: 'eye-off' },
-            { id: 'sign', name: 'Digital Signature', description: 'Add digital signature to PDF', category: 'security', icon: 'pen-tool' },
+
+            // Business Tools (20)
+            { id: 'invoice-generator', name: 'Invoice Generator', description: 'Create professional invoices as PDF', category: 'business', icon: 'file-text' },
+            { id: 'receipt-generator', name: 'Receipt Generator', description: 'Create payment receipts as PDF', category: 'business', icon: 'file-text' },
+            { id: 'letterhead-generator', name: 'Letterhead', description: 'Create professional letterhead PDF', category: 'business', icon: 'mail' },
+            { id: 'contract-generator', name: 'Contract Template', description: 'Generate contract PDF with terms', category: 'business', icon: 'file-text' },
+            { id: 'nda-generator', name: 'NDA Generator', description: 'Create Non-Disclosure Agreement PDF', category: 'business', icon: 'shield' },
+            { id: 'business-card-generator', name: 'Business Card', description: 'Create printable business card PDF', category: 'business', icon: 'briefcase' },
+            { id: 'report-generator', name: 'Report Template', description: 'Generate professional report PDF', category: 'business', icon: 'file-text' },
+            { id: 'expense-report-generator', name: 'Expense Report', description: 'Create expense report PDF', category: 'business', icon: 'file-text' },
+            { id: 'timesheet-generator', name: 'Timesheet', description: 'Create weekly timesheet PDF', category: 'business', icon: 'file-text' },
+            { id: 'meeting-minutes-generator', name: 'Meeting Minutes', description: 'Create meeting minutes PDF', category: 'business', icon: 'file-text' },
+            { id: 'proposal-generator', name: 'Proposal Generator', description: 'Create business proposal PDF', category: 'business', icon: 'file-text' },
+            { id: 'purchase-order-generator', name: 'Purchase Order', description: 'Create purchase order PDF', category: 'business', icon: 'file-text' },
+            { id: 'packing-slip-generator', name: 'Packing Slip', description: 'Create shipping packing slip PDF', category: 'business', icon: 'file-text' },
+            { id: 'certificate-generator', name: 'Certificate', description: 'Create award/completion certificates', category: 'business', icon: 'check-square' },
+            { id: 'payslip-generator', name: 'Payslip Generator', description: 'Create employee payslip PDF', category: 'business', icon: 'file-text' },
+            { id: 'memo-generator', name: 'Memo Template', description: 'Create office memorandum PDF', category: 'business', icon: 'file-text' },
+            { id: 'agenda-generator', name: 'Agenda Creator', description: 'Create meeting agenda PDF', category: 'business', icon: 'list' },
+            { id: 'company-profile-generator', name: 'Company Profile', description: 'Create company profile PDF', category: 'business', icon: 'briefcase' },
+            { id: 'quotation-generator', name: 'Quotation', description: 'Create price quotation PDF', category: 'business', icon: 'file-text' },
+            { id: 'attendance-generator', name: 'Attendance Sheet', description: 'Create attendance tracking sheet', category: 'business', icon: 'check-square' },
 
             // Annotate Tools
             { id: 'highlight', name: 'Highlight Text', description: 'Highlight text in PDF', category: 'annotate', icon: 'edit-3' },
-            { id: 'underline', name: 'Underline Text', description: 'Underline text in PDF', category: 'annotate', icon: 'underline' },
-            { id: 'strikeout', name: 'Strikeout Text', description: 'Strike through text in PDF', category: 'annotate', icon: 'minus' },
             { id: 'sticky-notes', name: 'Sticky Notes', description: 'Add sticky note comments', category: 'annotate', icon: 'message-square' },
-            { id: 'comments', name: 'Comment Threads', description: 'Add threaded comments', category: 'annotate', icon: 'message-circle' },
-            { id: 'draw-shapes', name: 'Draw Shapes', description: 'Add annotation shapes', category: 'annotate', icon: 'square' },
             { id: 'stamps', name: 'Add Stamps', description: 'Add stamps to PDF', category: 'annotate', icon: 'check-square' },
-            { id: 'export-annotations', name: 'Export Annotations', description: 'Export all annotations', category: 'annotate', icon: 'download' },
 
             // Forms Tools
             { id: 'fill-form', name: 'Fill Form', description: 'Fill out PDF forms', category: 'forms', icon: 'edit' },
-            { id: 'add-text-field', name: 'Add Text Field', description: 'Insert text input fields', category: 'forms', icon: 'text-cursor' },
-            { id: 'add-checkbox', name: 'Add Checkbox', description: 'Add checkbox fields', category: 'forms', icon: 'check-square' },
-            { id: 'add-radio', name: 'Add Radio Button', description: 'Add radio button fields', category: 'forms', icon: 'circle' },
-            { id: 'add-dropdown', name: 'Add Dropdown', description: 'Add dropdown selection', category: 'forms', icon: 'chevron-down' },
-            { id: 'add-signature', name: 'Signature Field', description: 'Add signature field', category: 'forms', icon: 'pen-tool' },
-            { id: 'clear-form', name: 'Clear Form', description: 'Clear all form fields', category: 'forms', icon: 'x' },
-            { id: 'flatten-form', name: 'Flatten Form', description: 'Convert form to static PDF', category: 'forms', icon: 'layers' },
-
-            // Print Tools
-            { id: 'print', name: 'Print PDF', description: 'Print PDF document', category: 'print', icon: 'printer' },
-            { id: 'page-scaling', name: 'Page Scaling', description: 'Scale pages to fit paper', category: 'print', icon: 'maximize' },
-            { id: 'booklet', name: 'Booklet Layout', description: 'Create booklet print layout', category: 'print', icon: 'book-open' },
-            { id: 'n-up', name: 'Multiple Per Sheet', description: 'Print multiple pages per sheet', category: 'print', icon: 'grid' },
-            { id: 'margins', name: 'Adjust Margins', description: 'Modify page margins', category: 'print', icon: 'move' },
-
-            // Share Tools
-            { id: 'download', name: 'Download PDF', description: 'Download processed PDF', category: 'share', icon: 'download' },
-            { id: 'share-link', name: 'Share Link', description: 'Create shareable link', category: 'share', icon: 'share-2' },
-            { id: 'email', name: 'Send by Email', description: 'Email PDF directly', category: 'share', icon: 'mail' },
-            { id: 'embed', name: 'Embed Code', description: 'Get embed code for websites', category: 'share', icon: 'code' },
-            { id: 'export-zip', name: 'Export as ZIP', description: 'Download multiple files as ZIP', category: 'share', icon: 'archive' }
+            { id: 'flatten-form', name: 'Flatten Form', description: 'Convert form to static PDF', category: 'forms', icon: 'layers' }
         ];
 
         // Icon SVGs
@@ -284,7 +254,8 @@
             'move': '<polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/>',
             'share-2': '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
             'mail': '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
-            'archive': '<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>'
+            'archive': '<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>',
+            'briefcase': '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'
         };
 
         function getIcon(iconName) {
